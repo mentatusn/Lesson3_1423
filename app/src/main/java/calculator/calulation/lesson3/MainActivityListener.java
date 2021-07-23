@@ -44,13 +44,13 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(TAG,counters);
+        outState.putParcelable(TAG,counters);
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        counters = (Counters) savedInstanceState.getSerializable(TAG);
+        counters = savedInstanceState.getParcelable(TAG);
         setContent();
     }
 

@@ -1,8 +1,11 @@
 package calculator.calulation.lesson3;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class Counters implements Serializable {
+public class Counters implements Parcelable {
     private int counter1 = 0;
     private int counter2 = 0;
     private int counter3 = 0;
@@ -10,6 +13,11 @@ public class Counters implements Serializable {
     private int counter5 = 0;
     private int counter6 = 0;
 
+
+
+
+
+    Counters(){}
 
     public void incCounter1() {
         this.counter1++;
@@ -83,4 +91,41 @@ public class Counters implements Serializable {
     public int getCounter6() {
         return counter6;
     }
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(counter1);
+        dest.writeInt(counter2);
+        dest.writeInt(counter3);
+        dest.writeInt(counter4);
+        dest.writeInt(counter5);
+        dest.writeInt(counter6);
+    }
+    protected Counters(Parcel in) {
+        counter1 = in.readInt();
+        counter2 = in.readInt();
+        counter3 = in.readInt();
+        counter4 = in.readInt();
+        counter5 = in.readInt();
+        counter6 = in.readInt();
+    }
+
+    public static final Creator<Counters> CREATOR = new Creator<Counters>() {
+        @Override
+        public Counters createFromParcel(Parcel in) {
+            return new Counters(in);
+        }
+
+        @Override
+        public Counters[] newArray(int size) {
+            return new Counters[size];
+        }
+    };
 }
