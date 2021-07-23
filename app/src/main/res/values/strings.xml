@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lesson3</string>
+    <string name="bad_practice">Bad practice</string>
+    <string name="good_practice_1">Good practice 1</string>
+    <string name="good_practice_2_1">Good practice 2(1)</string>
+    <string name="good_practice_3_2">Good practice 3(2)</string>
+    <string name="good_practice_3_1">Good practice 3(1)</string>
+</resources>
