@@ -1,8 +1,11 @@
 package calculator.calulation.lesson3;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +14,8 @@ import android.widget.Toast;
 
 public class MainActivityListener extends AppCompatActivity implements View.OnClickListener {
 
-    private int counter1 = 0;
-    private int counter2 = 0;
-    private int counter3 = 0;
-    private int counter4 = 0;
-    private int counter5 = 0;
-    private int counter6 = 0;
+
+    static String TAG = "counters";
     TextView textView1;
     TextView textView2;
     TextView textView3;
@@ -30,21 +29,37 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
     Button button5;
     Button button6;
 
+    Counters counters;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_listener);
         initView();
-        setContent();
         initListeners();
+        counters = new Counters();
+        setContent();
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(TAG,counters);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        counters = (Counters) savedInstanceState.getSerializable(TAG);
+        setContent();
     }
 
     private void initListeners() {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter2++;
-                textView2.setText(String.valueOf(counter2));
+                counters.incCounter2();
+                textView2.setText(String.valueOf(counters.getCounter2()));
             }
         });
         button3.setOnClickListener(this);
@@ -59,12 +74,12 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.button5:
-                    counter5++;
-                    textView5.setText(String.valueOf(counter5));
+                    counters.incCounter5();
+                    textView5.setText(String.valueOf(counters.getCounter5()));
                     break;
                 case R.id.button6:
-                    counter6++;
-                    textView6.setText(String.valueOf(counter6));
+                    counters.incCounter6();
+                    textView6.setText(String.valueOf(counters.getCounter6()));
                     break;
                 default: break;
             }
@@ -75,12 +90,12 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button3:
-                counter3++;
-                textView3.setText(String.valueOf(counter3));
+                counters.incCounter3();
+                textView3.setText(String.valueOf(counters.getCounter3()));
                 break;
             case R.id.button4:
-                counter4++;
-                textView4.setText(String.valueOf(counter4));
+                counters.incCounter4();
+                textView4.setText(String.valueOf(counters.getCounter4()));
                 break;
             default: break;
         }
@@ -89,8 +104,8 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
     public void onBadClick(View view) {
         if (view.getId() == R.id.button1) {
             onToast("button1");
-            counter1++;
-            textView1.setText(String.valueOf(counter1));
+            counters.incCounter1();
+            textView1.setText(String.valueOf(counters.getCounter1()));
         }
     }
 
@@ -101,12 +116,12 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
 
 
     private void setContent() {
-        textView1.setText(String.valueOf(counter1));
-        textView2.setText(String.valueOf(counter2));
-        textView3.setText(String.valueOf(counter3));
-        textView4.setText(String.valueOf(counter4));
-        textView5.setText(String.valueOf(counter5));
-        textView6.setText(String.valueOf(counter6));
+        textView1.setText(String.valueOf(counters.getCounter1()));
+        textView2.setText(String.valueOf(counters.getCounter2()));
+        textView3.setText(String.valueOf(counters.getCounter3()));
+        textView4.setText(String.valueOf(counters.getCounter4()));
+        textView5.setText(String.valueOf(counters.getCounter5()));
+        textView6.setText(String.valueOf(counters.getCounter6()));
     }
 
     private void initView() {
