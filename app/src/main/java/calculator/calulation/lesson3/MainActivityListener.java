@@ -34,27 +34,12 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_listener);
+        initView();
+        setContent();
+        initListeners();
+    }
 
-
-        textView1 = findViewById(R.id.textView1);
-        textView2 = findViewById(R.id.textView2);
-        textView3 = findViewById(R.id.textView3);
-        textView4 = findViewById(R.id.textView4);
-        textView5 = findViewById(R.id.textView5);
-        textView6 = findViewById(R.id.textView6);
-        textView1.setText(String.valueOf(counter1));
-        textView2.setText(String.valueOf(counter2));
-        textView3.setText(String.valueOf(counter3));
-        textView4.setText(String.valueOf(counter4));
-        textView5.setText(String.valueOf(counter5));
-        textView6.setText(String.valueOf(counter6));
-
-
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
-        button5 = findViewById(R.id.button5);
-        button6 = findViewById(R.id.button6);
+    private void initListeners() {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,11 +49,10 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
         });
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
-
         button5.setOnClickListener(listener);
         button6.setOnClickListener(listener);
-
     }
+
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -115,5 +99,28 @@ public class MainActivityListener extends AppCompatActivity implements View.OnCl
         Log.d("mylogs", message);
     }
 
+
+    private void setContent() {
+        textView1.setText(String.valueOf(counter1));
+        textView2.setText(String.valueOf(counter2));
+        textView3.setText(String.valueOf(counter3));
+        textView4.setText(String.valueOf(counter4));
+        textView5.setText(String.valueOf(counter5));
+        textView6.setText(String.valueOf(counter6));
+    }
+
+    private void initView() {
+        textView1 = findViewById(R.id.textView1);
+        textView2 = findViewById(R.id.textView2);
+        textView3 = findViewById(R.id.textView3);
+        textView4 = findViewById(R.id.textView4);
+        textView5 = findViewById(R.id.textView5);
+        textView6 = findViewById(R.id.textView6);
+        button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
+        button4 = findViewById(R.id.button4);
+        button5 = findViewById(R.id.button5);
+        button6 = findViewById(R.id.button6);
+    }
 
 }
